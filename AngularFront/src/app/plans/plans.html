@@ -1,0 +1,130 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Insurance Plans</h2>
+
+    <!-- Loading spinner -->
+    <div class="text-center" *ngIf="!plans.length">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Plans grid -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let plan of plans">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{plan.planName}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${{plan.baseAmt}}</h6>
+                    <p class="card-text">{{plan.description}}</p>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>Validity: {{plan.validity}}</li>
+                    </ul>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <button class="btn btn-primary w-100" (click)="openForm(plan.id)">Select Plan</button>
+                </div>
+                <!-- Booking form (appears when selecting a plan) -->
+                <div class="modal-backdrop fade show" *ngIf="isOpen" style="position:fixed;inset:0;z-index:1040;"></div>
+                <div class="d-flex justify-content-center" *ngIf="isOpen"
+                    style="position:fixed;inset:0;align-items:center;z-index:1050;">
+                    <div class="card shadow-lg" style="width: 520px;">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Book Plan</h5>
+                            <button class="btn-close" aria-label="Close" (click)="closeForm()"></button>
+                        </div>
+                        <div class="card-body">
+                            <form (ngSubmit)="saveBooking()" #form="ngForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Plan ID</label>
+                                    <input class="form-control" [(ngModel)]="booking.planId" name="planId" readonly />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Plan Name</label>
+                                    <input class="form-control" [(ngModel)]="booking.planName" name="planName"
+                                        readonly />
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Validity</label>
+                                    <input class="form-control" [(ngModel)]="booking.validity" name="validity"
+                                        readonly />
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Full Name</label>
+                                        <input class="form-control" [(ngModel)]="booking.name" name="name" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Age</label>
+                                        <input class="form-control" [(ngModel)]="booking.age" name="age" type="number"
+                                            required />
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">City</label>
+                                    <input class="form-control" [(ngModel)]="booking.city" name="city" />
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Phone</label>
+                                        <input class="form-control" [(ngModel)]="booking.phone" name="phone" />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input class="form-control" [(ngModel)]="booking.email" name="email"
+                                            type="email" />
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Payment Mode</label>
+                                    <select class="form-select" [(ngModel)]="booking.paymentMode" name="paymentMode">
+                                        <option value="">Choose...</option>`
+                                        <option>Card</option>
+                                  
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Card Number</label>
+                                    <input class="form-control" [(ngModel)]="booking.cardNumber" name="cardNumber" />
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Premium Amount</label>
+                                        <input class="form-control" [(ngModel)]="booking.premiumAmt" name="premiumAmt"
+                                            type="number" />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Payment Frequency</label>
+                                        <select class="form-select" [(ngModel)]="booking.paymentFreq"
+                                            name="paymentFreq">
+                                            <option value="">Choose...</option>
+                                            <option>Monthly</option>
+                                            <option>Quarterly</option>
+                                            <option>Yearly</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-secondary me-2"
+                                        (click)="closeForm()">Cancel</button>
+                                    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Confirm
+                                        Booking</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

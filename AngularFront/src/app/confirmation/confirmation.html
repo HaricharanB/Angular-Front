@@ -1,0 +1,10 @@
+<div *ngIf="booking">
+  <h2>Booking Confirmation</h2>
+  <p><strong>Name:</strong> {{ booking.name }}</p>
+  <p><strong>City:</strong> {{ booking.city }}</p>
+  <p><strong>Email:</strong> {{ booking.email }}</p>
+  <p><strong>Phone:</strong> {{ booking.phone }}</p>
+  <p><strong>Plan:</strong> {{ booking.planName }}</p>
+  <p><strong>Premium Amount:</strong> ₹{{ booking.premiumAmt }}</p>
+  <p><strong>Payment Frequency:</strong> {{ booking.paymentFreq }}</p>
+</div>
