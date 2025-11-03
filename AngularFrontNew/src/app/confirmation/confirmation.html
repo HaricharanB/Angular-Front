@@ -1,0 +1,45 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <!-- Loading Spinner -->
+      <div *ngIf="loading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <!-- Booking Confirmation -->
+      <div *ngIf="!loading && booking" class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+          <h4 class="mb-0">Booking Confirmation</h4>
+        </div>
+        <div class="card-body">
+          <p class="lead text-success text-center mb-4">
+            🎉 Your booking has been confirmed successfully!
+          </p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Name:</strong> {{ booking.name }}</li>
+            <li class="list-group-item"><strong>City:</strong> {{ booking.city }}</li>
+            <li class="list-group-item"><strong>Email:</strong> {{ booking.email }}</li>
+            <li class="list-group-item"><strong>Phone:</strong> {{ booking.phone }}</li>
+            <li class="list-group-item"><strong>Plan:</strong> {{ booking.planName }}</li>
+            <li class="list-group-item">
+              <strong>Premium Amount:</strong>
+              <span class="text-primary fw-bold">₹{{ booking.premiumAmt }}</span>
+            </li>
+            <li class="list-group-item"><strong>Payment Frequency:</strong> {{ booking.paymentFreq }}</li>
+          </ul>
+        </div>
+        <div class="card-footer text-center bg-light">
+          <a routerLink="/plans" class="btn btn-outline-primary me-2">Back to Plans</a>
+          <a routerLink="/" class="btn btn-success">Go Home</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div>
+  <router-outlet></router-outlet>
+</div>
